@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PaidRight — Reset password</title>
+  <link rel="stylesheet" href="/assets/style.css" />
+  <style>
+    body { background: var(--gray-50); display: flex; align-items: center;
+      justify-content: center; min-height: 100vh; padding: 16px; }
+    .card { background: #fff; border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(12,31,75,.08); max-width: 420px;
+      width: 100%; padding: 28px 24px; }
+    .card h1 { margin: 0 0 6px; font-size: 22px; color: var(--brand); }
+    .lead { margin: 0 0 22px; color: var(--gray-500); font-size: 14px; }
+    label { display: block; font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .04em; color: var(--gray-500);
+      margin-bottom: 6px; }
+    input[type="password"] { width: 100%; padding: 12px 14px;
+      border: 1px solid var(--gray-200); border-radius: 12px; font-size: 16px;
+      color: var(--brand); background: #fff; margin-bottom: 16px; }
+    input[type="password"]:focus { outline: 2px solid var(--emerald);
+      outline-offset: 0; border-color: transparent; }
+    button { width: 100%; padding: 14px; border: 0; border-radius: 14px;
+      background: var(--brand); color: #fff; font-size: 16px; font-weight: 600;
+      cursor: pointer; }
+    button:disabled { opacity: .4; cursor: default; }
+    .msg-error { color: var(--red); font-size: 13px; margin: 0 0 12px; }
+    .msg-success { background: #ECFDF5; color: var(--emerald-dark);
+      padding: 12px 14px; border-radius: 12px; font-size: 14px;
+      margin-bottom: 14px; border: 1px solid #A7F3D0; }
+    .reset-footer { margin-top: 16px; text-align: center;
+      color: var(--gray-500); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Set a new password</h1>
+    <p class="lead">After saving, open the PaidRight app and sign in with your new password.</p>
+
+    <div id="error" class="msg-error" hidden></div>
+    <div id="success" class="msg-success" hidden>
+      ✓ Password updated. You can now open PaidRight and sign in.
+    </div>
+
+    <form id="form">
+      <label for="pw1">New password</label>
+      <input id="pw1" type="password" placeholder="At least 6 characters" autocomplete="new-password" minlength="6" required />
+      <label for="pw2">Confirm new password</label>
+      <input id="pw2" type="password" placeholder="Re-enter it" autocomplete="new-password" minlength="6" required />
+      <button id="submit" type="submit">Update password</button>
+    </form>
+
+    <div class="reset-footer">PaidRight · Ireland</div>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    // Publishable anon key — safe to expose; Row-Level Security protects all writes.
+    const SUPABASE_URL = 'https://jvrzmgzawzoapcnporhi.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_VHymNgTH3FhU28oZozAF1w_tQprNWpi';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const errorEl = document.getElementById('error');
+    const successEl = document.getElementById('success');
+    const formEl = document.getElementById('form');
+    const submitBtn = document.getElementById('submit');
+
+    function showError(msg) {
+      errorEl.textContent = msg;
+      errorEl.hidden = false;
+    }
+
+    // The reset link puts the recovery tokens in the URL hash. Parse them
+    // and set the session before allowing the password update.
+    async function init() {
+      const hash = window.location.hash.replace(/^#/, '');
+      const params = new URLSearchParams(hash);
+      const access_token = params.get('access_token');
+      const refresh_token = params.get('refresh_token');
+      const type = params.get('type');
+
+      if (!access_token || type !== 'recovery') {
+        showError('This link is missing the recovery token. Request a new reset link from the app.');
+        submitBtn.disabled = true;
+        return;
+      }
+
+      const { error } = await supabase.auth.setSession({
+        access_token,
+        refresh_token: refresh_token ?? '',
+      });
+      if (error) {
+        showError(error.message);
+        submitBtn.disabled = true;
+      }
+    }
+
+    formEl.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.hidden = true;
+      const pw1 = document.getElementById('pw1').value;
+      const pw2 = document.getElementById('pw2').value;
+      if (pw1.length < 6) return showError('Password must be at least 6 characters.');
+      if (pw1 !== pw2) return showError('Passwords do not match.');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Updating...';
+
+      const { error } = await supabase.auth.updateUser({ password: pw1 });
+
+      if (error) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Update password';
+        return showError(error.message);
+      }
+
+      formEl.hidden = true;
+      successEl.hidden = false;
+    });
+
+    init();
+  </script>
+</body>
+</html>
