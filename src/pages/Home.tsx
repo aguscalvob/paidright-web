@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { APP_STORE_URL, PLAY_STORE_URL } from '../lib/links.ts';
 
@@ -35,6 +35,13 @@ function StoreButton({
   );
 }
 
+const FEATURES = [
+  'Real take-home pay',
+  'Holiday entitlements',
+  'Irish tax calculations',
+  'Break rights',
+];
+
 export function Home() {
   const navigate = useNavigate();
   const [emailConfirmed, setEmailConfirmed] = useState(false);
@@ -55,6 +62,66 @@ export function Home() {
 
   return (
     <>
+      <section className="hero">
+        <div className="hero-inner">
+          <div className="hero-top">
+            <Link className="brand" to="/">
+              <span className="logo">P✓</span> PAIDRIGHT
+            </Link>
+            <div className="hero-actions">
+              <nav className="hero-nav">
+                <Link to="/">Home</Link>
+                <Link to="/about">About</Link>
+                <Link to="/terms">Terms</Link>
+                <Link to="/privacy">Privacy</Link>
+                <Link to="/contact">Contact</Link>
+              </nav>
+              <a className="freedl" href="#get">
+                Free Download
+              </a>
+            </div>
+          </div>
+
+          <h1>
+            Are you being
+            <br />
+            <span className="accent">paid right?</span>
+          </h1>
+
+          <p className="sub">
+            Most hourly workers don't know their exact take-home, breaks, or
+            holiday rights. Now you will.
+          </p>
+
+          <div className="pills">
+            {FEATURES.map((f) => (
+              <span className="pill" key={f}>
+                {f}
+              </span>
+            ))}
+          </div>
+
+          <p className="tagline">
+            Your work. Your rights. <span className="muted">Your money.</span>
+          </p>
+
+          <div className="downloads" id="get">
+            <StoreButton
+              url={APP_STORE_URL}
+              glyph=""
+              small="Download on the"
+              big="App Store"
+            />
+            <StoreButton
+              url={PLAY_STORE_URL}
+              glyph="▶"
+              small="Get it on"
+              big="Google Play"
+            />
+          </div>
+        </div>
+      </section>
+
       {emailConfirmed && (
         <div className="confirmed-wrap">
           <div className="confirmed-card">
@@ -64,67 +131,19 @@ export function Home() {
         </div>
       )}
 
-      <section className="hero">
-        <div className="logo-lg">P</div>
-        <h1>Know what you're really paid.</h1>
-        <p>
-          PaidRight helps hourly workers in Ireland track their hours and see
-          their take-home pay after PAYE, PRSI and USC — plus holiday
-          entitlement under the Organisation of Working Time Act.
-        </p>
-
-        <div className="downloads">
-          <StoreButton
-            url={APP_STORE_URL}
-            glyph=""
-            small="Download on the"
-            big="App Store"
-          />
-          <StoreButton
-            url={PLAY_STORE_URL}
-            glyph="▶"
-            small="Get it on"
-            big="Google Play"
-          />
+      <footer className="lfoot">
+        <div className="inner">
+          <div className="row">
+            <div className="links">
+              <Link to="/about">About</Link>
+              <Link to="/privacy">Privacy Policy</Link>
+              <Link to="/terms">Terms of Service</Link>
+              <Link to="/contact">Contact</Link>
+            </div>
+            <div className="copy">© 2026 PaidRight · Dublin, Ireland</div>
+          </div>
         </div>
-
-        <p className="made">Made in Ireland 🇮🇪 · Free</p>
-      </section>
-
-      <section className="features">
-        <div className="feature">
-          <h3>Take-home pay</h3>
-          <p>
-            Log your hours and see your estimated net pay after Irish tax and
-            deductions — weekly, fortnightly or monthly.
-          </p>
-        </div>
-        <div className="feature">
-          <h3>Holiday entitlement</h3>
-          <p>
-            Track the leave you've earned under the Organisation of Working
-            Time Act, and what unused leave is worth if you move on.
-          </p>
-        </div>
-        <div className="feature">
-          <h3>Premiums &amp; breaks</h3>
-          <p>
-            Sunday and night-shift premiums, bank-holiday rules, and rest-break
-            reminders based on Workplace Relations Commission guidance.
-          </p>
-        </div>
-      </section>
-
-      <div className="disclaimer">
-        <div className="card">
-          <strong>Heads up:</strong> PaidRight is a planning tool, not a payroll
-          or legal service. Figures are estimates based on publicly available
-          Irish government information (Revenue, Citizens Information, the WRC)
-          for the single-person standard case. For binding answers about your
-          pay or entitlements, contact Revenue, the WRC, your union, or a
-          qualified professional.
-        </div>
-      </div>
+      </footer>
     </>
   );
 }

@@ -1,33 +1,41 @@
 import { Link, Outlet } from 'react-router-dom';
 
-import { CONTACT_EMAIL } from '../lib/links.ts';
-
-/** Shared chrome (nav + footer) for the content pages. */
+/**
+ * Chrome for the inner pages. Keeps the navy brand background across the whole
+ * site and floats the page content in a white "capsule" card, with a dark
+ * top nav and footer to match the landing page.
+ */
 export function Layout() {
   return (
-    <>
-      <nav className="nav">
+    <div className="page">
+      <nav className="subnav">
         <Link className="brand" to="/">
-          <span className="logo">P</span> PaidRight
+          <span className="logo">P✓</span> PAIDRIGHT
         </Link>
         <div className="links">
-          <Link to="/privacy">Privacy</Link>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
           <Link to="/terms">Terms</Link>
+          <Link to="/privacy">Privacy</Link>
+          <Link to="/contact">Contact</Link>
         </div>
       </nav>
 
-      <Outlet />
-
-      <footer className="footer">
-        <div className="inner">
-          <div>
-            <Link to="/privacy">Privacy Policy</Link>
-            <Link to="/terms">Terms of Service</Link>
-            <a href={`mailto:${CONTACT_EMAIL}`}>Contact</a>
-          </div>
-          <div>© 2026 PaidRight · Dublin, Ireland</div>
+      <main className="page-main">
+        <div className="page-card">
+          <Outlet />
         </div>
+      </main>
+
+      <footer className="page-foot">
+        <div className="links">
+          <Link to="/about">About</Link>
+          <Link to="/privacy">Privacy</Link>
+          <Link to="/terms">Terms</Link>
+          <Link to="/contact">Contact</Link>
+        </div>
+        <div className="copy">© 2026 PaidRight · Dublin, Ireland</div>
       </footer>
-    </>
+    </div>
   );
 }
