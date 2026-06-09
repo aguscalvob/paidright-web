@@ -1,0 +1,429 @@
+/* PaidRight marketing + legal site — global styles.
+   Navy + emerald brand, matching the app (see app's src/constants/colors.ts). */
+
+:root {
+  --brand: #0c1f4b;
+  --brand-700: #15306b;
+  --emerald: #10b981;
+  --emerald-dark: #047857;
+  --indigo: #6366f1;
+  --red: #dc2626;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e5e7eb;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-700: #374151;
+  --gray-900: #111827;
+  --maxw: 760px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  color: var(--gray-900);
+  background: #fff;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--brand);
+}
+a:hover {
+  color: var(--emerald-dark);
+}
+
+/* ---- Top bar ---- */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+.nav .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--brand);
+  text-decoration: none;
+}
+.nav .logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--brand);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 16px;
+}
+.nav .links a {
+  margin-left: 18px;
+  font-size: 14px;
+  color: var(--gray-500);
+  text-decoration: none;
+}
+.nav .links a:hover {
+  color: var(--brand);
+}
+
+/* ---- Hero (landing) ---- */
+.hero {
+  background: var(--brand);
+  color: #fff;
+  text-align: center;
+  padding: 72px 24px 80px;
+}
+.hero .logo-lg {
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  background: #fff;
+  color: var(--brand);
+  display: grid;
+  place-items: center;
+  font-size: 40px;
+  font-weight: 800;
+  margin: 0 auto 22px;
+}
+.hero h1 {
+  font-size: 40px;
+  line-height: 1.15;
+  margin: 0 0 14px;
+  font-weight: 800;
+}
+.hero p {
+  font-size: 18px;
+  color: #c7d0e4;
+  max-width: 540px;
+  margin: 0 auto 8px;
+}
+.hero .made {
+  margin-top: 22px;
+  font-size: 13px;
+  color: #8ea0c4;
+}
+
+/* ---- Email-confirmed banner ---- */
+.confirmed-wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 8px 24px 0;
+}
+.confirmed-card {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #047857;
+  border-radius: 14px;
+  padding: 16px 18px;
+  font-size: 15px;
+}
+
+/* ---- Download buttons (hero) ---- */
+.downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: var(--brand);
+  border-radius: 14px;
+  padding: 11px 18px 11px 16px;
+  text-decoration: none;
+  min-width: 188px;
+  border: 1px solid transparent;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+.store-btn:hover {
+  color: var(--brand);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+.store-btn .glyph {
+  font-size: 26px;
+  line-height: 1;
+}
+.store-btn .store-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
+.store-btn .store-label .small {
+  font-size: 11px;
+  color: var(--gray-500);
+}
+.store-btn .store-label .big {
+  font-size: 16px;
+  font-weight: 700;
+}
+.store-btn.disabled {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+.store-btn.disabled .store-label .small {
+  color: var(--emerald-dark);
+  font-weight: 600;
+}
+
+/* ---- Feature strip ---- */
+.features {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 56px 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+.feature {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  padding: 22px;
+}
+.feature h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: var(--brand);
+}
+.feature p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--gray-700);
+}
+
+/* ---- Disclaimer card ---- */
+.disclaimer {
+  max-width: var(--maxw);
+  margin: 0 auto 56px;
+  padding: 0 24px;
+}
+.disclaimer .card {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  border-radius: 16px;
+  padding: 18px 20px;
+  font-size: 13px;
+}
+
+/* ---- Legal / content pages ---- */
+.content {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 16px 24px 80px;
+}
+.content h1 {
+  font-size: 30px;
+  color: var(--brand);
+  margin: 16px 0 4px;
+}
+.content .effective {
+  color: var(--gray-500);
+  font-size: 14px;
+  margin: 0 0 28px;
+}
+.content h2 {
+  font-size: 20px;
+  color: var(--brand);
+  margin: 36px 0 8px;
+  padding-top: 8px;
+}
+.content h3 {
+  font-size: 16px;
+  color: var(--brand-700);
+  margin: 22px 0 6px;
+}
+.content p,
+.content li {
+  font-size: 15px;
+  color: var(--gray-700);
+}
+.content ul {
+  padding-left: 22px;
+}
+.content li {
+  margin-bottom: 6px;
+}
+.content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 14px 0;
+  font-size: 14px;
+}
+.content th,
+.content td {
+  border: 1px solid var(--gray-200);
+  padding: 9px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+.content th {
+  background: var(--gray-100);
+  color: var(--brand);
+}
+.content strong {
+  color: var(--gray-900);
+}
+.content code {
+  background: var(--gray-100);
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.content .callout {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+}
+.content .callout strong {
+  color: #92400e;
+}
+
+/* ---- Footer ---- */
+.footer {
+  border-top: 1px solid var(--gray-200);
+  background: var(--gray-50);
+}
+.footer .inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 28px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--gray-500);
+}
+.footer a {
+  color: var(--gray-500);
+  text-decoration: none;
+  margin-right: 16px;
+}
+.footer a:hover {
+  color: var(--brand);
+}
+
+/* ---- Reset password card ---- */
+.reset-body {
+  background: var(--gray-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 16px;
+}
+.reset-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(12, 31, 75, 0.08);
+  max-width: 420px;
+  width: 100%;
+  padding: 28px 24px;
+}
+.reset-card h1 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  color: var(--brand);
+}
+.reset-card .lead {
+  margin: 0 0 22px;
+  color: var(--gray-500);
+  font-size: 14px;
+}
+.reset-card label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gray-500);
+  margin-bottom: 6px;
+}
+.reset-card input[type='password'] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  font-size: 16px;
+  color: var(--brand);
+  background: #fff;
+  margin-bottom: 16px;
+}
+.reset-card input[type='password']:focus {
+  outline: 2px solid var(--emerald);
+  outline-offset: 0;
+  border-color: transparent;
+}
+.reset-card button {
+  width: 100%;
+  padding: 14px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.reset-card button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.msg-error {
+  color: var(--red);
+  font-size: 13px;
+  margin: 0 0 12px;
+}
+.msg-success {
+  background: #ecfdf5;
+  color: var(--emerald-dark);
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-bottom: 14px;
+  border: 1px solid #a7f3d0;
+}
+.reset-footer {
+  margin-top: 16px;
+  text-align: center;
+  color: var(--gray-500);
+  font-size: 12px;
+}
+
+@media (max-width: 520px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+  .nav .links a {
+    margin-left: 12px;
+  }
+}

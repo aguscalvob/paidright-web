@@ -1,101 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PaidRight — Know what you're really paid</title>
-  <meta name="description" content="PaidRight helps hourly workers in Ireland track their hours and estimate take-home pay, holiday entitlement, and more — based on Irish government information. Free." />
-  <link rel="stylesheet" href="/assets/style.css" />
-</head>
-<body>
-  <!-- If the user arrived here from a Supabase auth email (confirmation or
-       password reset), the tokens are in the URL hash. Route them before
-       showing the marketing page. -->
-  <script>
-    (function () {
-      var hash = window.location.hash || '';
-      var params = new URLSearchParams(hash.replace(/^#/, ''));
-      var type = params.get('type');
-      if (type === 'recovery') {
-        // Password reset — forward to the reset form, keep the tokens.
-        window.location.replace('/reset/' + hash);
-      } else if (params.get('access_token')) {
-        // Email confirmed (signup / magiclink) — show a success banner.
-        window.__emailConfirmed = true;
-      }
-    })();
-  </script>
-
-  <nav class="nav">
-    <a class="brand" href="/">
-      <span class="logo">P</span> PaidRight
-    </a>
-    <div class="links">
-      <a href="/privacy/">Privacy</a>
-      <a href="/terms/">Terms</a>
-    </div>
-  </nav>
-
-  <!-- Email-confirmed banner (shown only when arriving from a confirm link) -->
-  <div id="confirmed-banner" hidden style="max-width:760px;margin:0 auto;padding:0 24px;">
-    <div style="background:#ECFDF5;border:1px solid #A7F3D0;color:#047857;border-radius:14px;padding:16px 18px;margin-top:8px;font-size:15px;">
-      ✓ <strong>Your email is confirmed.</strong> Open the PaidRight app and sign in — you're all set.
-    </div>
-  </div>
-
-  <section class="hero">
-    <div class="logo-lg">P</div>
-    <h1>Know what you're really paid.</h1>
-    <p>PaidRight helps hourly workers in Ireland track their hours and see
-       their take-home pay after PAYE, PRSI and USC — plus holiday
-       entitlement under the Organisation of Working Time Act.</p>
-    <p class="made">Made in Ireland 🇮🇪 · Free</p>
-  </section>
-
-  <section class="features">
-    <div class="feature">
-      <h3>Take-home pay</h3>
-      <p>Log your hours and see your estimated net pay after Irish tax and
-         deductions — weekly, fortnightly or monthly.</p>
-    </div>
-    <div class="feature">
-      <h3>Holiday entitlement</h3>
-      <p>Track the leave you've earned under the Organisation of Working
-         Time Act, and what unused leave is worth if you move on.</p>
-    </div>
-    <div class="feature">
-      <h3>Premiums &amp; breaks</h3>
-      <p>Sunday and night-shift premiums, bank-holiday rules, and rest-break
-         reminders based on Workplace Relations Commission guidance.</p>
-    </div>
-  </section>
-
-  <div class="disclaimer">
-    <div class="card">
-      <strong>Heads up:</strong> PaidRight is a planning tool, not a payroll
-      or legal service. Figures are estimates based on publicly available
-      Irish government information (Revenue, Citizens Information, the WRC)
-      for the single-person standard case. For binding answers about your
-      pay or entitlements, contact Revenue, the WRC, your union, or a
-      qualified professional.
-    </div>
-  </div>
-
-  <footer class="footer">
-    <div class="inner">
-      <div>
-        <a href="/privacy/">Privacy Policy</a>
-        <a href="/terms/">Terms of Service</a>
-        <a href="mailto:paidright.app@hotmail.com">Contact</a>
-      </div>
-      <div>© 2026 PaidRight · Dublin, Ireland</div>
-    </div>
-  </footer>
-
-  <script>
-    if (window.__emailConfirmed) {
-      document.getElementById('confirmed-banner').hidden = false;
-    }
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PaidRight — Know what you're really paid</title>
+    <meta
+      name="description"
+      content="PaidRight helps hourly workers in Ireland track their hours and estimate take-home pay, holiday entitlement, and more — based on Irish government information. Free."
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
