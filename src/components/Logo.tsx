@@ -5,10 +5,10 @@ type Props = {
 };
 
 /**
- * The PaidRight mark — a stylised "P" with an emerald tick. Same geometry as
- * the app's `assets/icon.svg` so the website and app logo are identical.
- * The "P" is white (it sits inside the navy `.logo` tile, mirroring the app
- * icon: navy background, white P, emerald tick).
+ * The PaidRight mark — identical geometry to the app's `assets/icon.svg`:
+ * navy tile (the `.logo` background), white "P", emerald tick. The only
+ * tweak vs the app icon is a slightly thinner tick (stroke 18 → 14),
+ * vertically centered against the P.
  */
 export function Logo({ size = 30, className }: Props) {
   return (
@@ -26,10 +26,10 @@ export function Logo({ size = 30, className }: Props) {
         d="M18 108 L18 40 L46 40 A22 22 0 0 1 46 84 L37 84 L37 108 Z M37 53 L46 53 A9 9 0 0 1 46 71 L37 71 Z"
       />
       <path
-        d="M84 80 L98 96 L124 54"
+        d="M78 80 L92 96 L118 54"
         fill="none"
         stroke="#10B981"
-        strokeWidth={18}
+        strokeWidth={14}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
