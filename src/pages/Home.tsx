@@ -1,35 +1,40 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { Logo } from '../components/Logo.tsx';
 import { APP_STORE_URL, PLAY_STORE_URL } from '../lib/links.ts';
+import { usePlatform } from '../lib/usePlatform.ts';
 
-/** A single store download button. Shows "Coming soon" until `url` is set. */
-function StoreButton({
-  url,
-  glyph,
-  small,
-  big,
-}: {
+type Store = {
+  key: 'ios' | 'android';
   url: string;
   glyph: string;
   small: string;
   big: string;
-}) {
-  const live = url !== '';
+};
+
+const STORES: Record<'ios' | 'android', Store> = {
+  ios: { key: 'ios', url: APP_STORE_URL, glyph: '', small: 'Download on the', big: 'App Store' },
+  android: { key: 'android', url: PLAY_STORE_URL, glyph: '▶', small: 'Get it on', big: 'Google Play' },
+};
+
+/** A single store download button. Shows "Coming soon" until `url` is set. */
+function StoreButton({ store }: { store: Store }) {
+  const live = store.url !== '';
   return (
     <a
       className={live ? 'store-btn' : 'store-btn disabled'}
-      href={live ? url : undefined}
+      href={live ? store.url : undefined}
       aria-disabled={!live}
       target={live ? '_blank' : undefined}
       rel={live ? 'noreferrer' : undefined}
     >
       <span className="glyph" aria-hidden="true">
-        {glyph}
+        {store.glyph}
       </span>
       <span className="store-label">
-        <span className="small">{live ? small : 'Coming soon'}</span>
-        <span className="big">{big}</span>
+        <span className="small">{live ? store.small : 'Coming soon'}</span>
+        <span className="big">{store.big}</span>
       </span>
     </a>
   );
@@ -44,6 +49,7 @@ const FEATURES = [
 
 export function Home() {
   const navigate = useNavigate();
+  const platform = usePlatform();
   const [emailConfirmed, setEmailConfirmed] = useState(false);
 
   // Supabase auth emails redirect here with tokens in the URL hash.
@@ -60,13 +66,21 @@ export function Home() {
     }
   }, [navigate]);
 
+  // Lead with the visitor's platform; desktop shows both.
+  const isMobile = platform === 'ios' || platform === 'android';
+  const primary = platform === 'android' ? STORES.android : STORES.ios;
+  const secondary = primary.key === 'ios' ? STORES.android : STORES.ios;
+
   return (
     <>
       <section className="hero">
         <div className="hero-inner">
           <div className="hero-top">
             <Link className="brand" to="/">
-              <span className="logo">P✓</span> PAIDRIGHT
+              <span className="logo">
+                <Logo size={30} />
+              </span>{' '}
+              PAIDRIGHT
             </Link>
             <div className="hero-actions">
               <nav className="hero-nav">
@@ -106,18 +120,26 @@ export function Home() {
           </p>
 
           <div className="downloads" id="get">
-            <StoreButton
-              url={APP_STORE_URL}
-              glyph=""
-              small="Download on the"
-              big="App Store"
-            />
-            <StoreButton
-              url={PLAY_STORE_URL}
-              glyph="▶"
-              small="Get it on"
-              big="Google Play"
-            />
+            {isMobile ? (
+              <>
+                <StoreButton store={primary} />
+                <a
+                  className="alt-store"
+                  href={secondary.url !== '' ? secondary.url : '#get'}
+                  target={secondary.url !== '' ? '_blank' : undefined}
+                  rel={secondary.url !== '' ? 'noreferrer' : undefined}
+                >
+                  {secondary.url !== ''
+                    ? `Also on ${secondary.big}`
+                    : `${secondary.big} coming soon`}
+                </a>
+              </>
+            ) : (
+              <>
+                <StoreButton store={STORES.ios} />
+                <StoreButton store={STORES.android} />
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -144,6 +166,13 @@ export function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Sticky mobile download bar — visible immediately on phones. */}
+      {isMobile && (
+        <div className="mcta">
+          <StoreButton store={primary} />
+        </div>
+      )}
     </>
   );
 }

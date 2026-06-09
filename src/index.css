@@ -46,19 +46,16 @@ a:hover {
   color: var(--emerald-dark);
 }
 
-/* ---- Brand logo tile (emerald square, navy P✓) ---- */
+/* ---- Brand logo tile (navy app-icon: white P + emerald tick) ---- */
 .logo {
   display: inline-grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 11px;
-  background: var(--emerald);
-  color: var(--brand);
-  font-weight: 800;
-  font-size: 17px;
-  letter-spacing: -0.04em;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  background: var(--brand);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
 }
 
 /* ---- Top bar (content pages, on white) ---- */
@@ -350,6 +347,24 @@ a:hover {
 .lfoot .row .copy {
   font-size: 13px;
   color: #6f80a6;
+}
+
+/* secondary store link (mobile, under the primary button) */
+.alt-store {
+  align-self: center;
+  color: #aebbd6;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 4px 2px;
+}
+.alt-store:hover {
+  color: var(--emerald-light);
+}
+
+/* sticky mobile download bar */
+.mcta {
+  display: none;
 }
 
 /* ---- Email-confirmed banner ---- */
@@ -736,5 +751,31 @@ a:hover {
   .subnav .links a {
     margin-left: 16px;
     font-size: 14px;
+  }
+}
+
+/* Sticky mobile download bar — appears on phones, pinned to the bottom. */
+@media (max-width: 640px) {
+  .mcta {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(10, 24, 56, 0.94);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .mcta .store-btn {
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+  }
+  /* keep the footer links clear of the sticky bar */
+  .lfoot {
+    padding-bottom: 92px;
   }
 }

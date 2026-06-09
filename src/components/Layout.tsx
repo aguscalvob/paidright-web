@@ -1,5 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
 
+import { Logo } from './Logo.tsx';
+
 /**
  * Chrome for the inner pages. Keeps the navy brand background across the whole
  * site and floats the page content in a white "capsule" card, with a dark
@@ -10,7 +12,10 @@ export function Layout() {
     <div className="page">
       <nav className="subnav">
         <Link className="brand" to="/">
-          <span className="logo">P✓</span> PAIDRIGHT
+          <span className="logo">
+            <Logo size={30} />
+          </span>{' '}
+          PAIDRIGHT
         </Link>
         <div className="links">
           <Link to="/">Home</Link>
