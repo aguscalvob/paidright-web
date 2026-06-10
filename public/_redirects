@@ -1,3 +1,0 @@
-# Cloudflare Pages SPA fallback — every path serves the React app so that
-# deep links like /privacy and /terms work on direct load / refresh.
-/*    /index.html    200
