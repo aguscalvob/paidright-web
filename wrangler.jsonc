@@ -1,0 +1,13 @@
+{
+  // Serves the static Vite build (dist/) as a Cloudflare Worker with static
+  // assets — no server code, just files. `npm run build` produces dist/,
+  // then `npx wrangler deploy` uploads it.
+  "name": "paidright-web",
+  "compatibility_date": "2026-06-10",
+  "assets": {
+    "directory": "./dist",
+    // SPA fallback: any unmatched path serves index.html so React Router
+    // handles /privacy, /terms, /about, /contact, /reset on direct load.
+    "not_found_handling": "single-page-application"
+  }
+}
