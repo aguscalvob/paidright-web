@@ -90,7 +90,10 @@ a:hover {
 /* ---- Hero ---- */
 .hero {
   position: relative;
-  overflow: hidden;
+  /* `clip` (not `hidden`) still clips the decorative streak/dots, but does NOT
+     create a scroll container — so the "#get" anchor scrolls the page instead
+     of scrolling inside the hero (which had no scrollbar = stuck). */
+  overflow: clip;
   background:
     radial-gradient(900px 520px at 72% 62%, #16356f 0%, transparent 62%),
     linear-gradient(158deg, #0c1f4b 0%, var(--navy-deep) 100%);
