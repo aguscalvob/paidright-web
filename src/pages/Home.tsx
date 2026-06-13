@@ -171,10 +171,24 @@ export function Home() {
       </section>
 
       {emailConfirmed && (
-        <div className="confirmed-wrap">
-          <div className="confirmed-card">
-            ✓ <strong>Your email is confirmed.</strong> Open the PaidRight app
-            and sign in — you're all set.
+        <div
+          className="confirm-modal"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setEmailConfirmed(false)}
+        >
+          <div
+            className="confirm-modal-card"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="confirm-check" aria-hidden="true">
+              ✓
+            </div>
+            <h2>Email confirmed</h2>
+            <p>You're all set — open the PaidRight app and sign in.</p>
+            <button type="button" onClick={() => setEmailConfirmed(false)}>
+              Got it
+            </button>
           </div>
         </div>
       )}

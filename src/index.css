@@ -425,14 +425,61 @@ a:hover {
   display: none;
 }
 
-/* ---- Email-confirmed banner ---- */
-.confirmed-wrap {
-  max-width: var(--contentw);
-  margin: 0 auto;
-  padding: 16px 24px 0;
+/* ---- Email-confirmed pop-up (centred modal) ---- */
+.confirm-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(8, 16, 40, 0.62);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
-.confirmed-wrap.on-dark {
-  padding-top: 0;
+.confirm-modal-card {
+  background: #fff;
+  border-radius: 22px;
+  max-width: 380px;
+  width: 100%;
+  padding: 36px 28px 30px;
+  text-align: center;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+}
+.confirm-check {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  border-radius: 999px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: var(--emerald-dark);
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  line-height: 1;
+}
+.confirm-modal-card h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  color: var(--brand);
+}
+.confirm-modal-card p {
+  margin: 0 0 22px;
+  font-size: 15px;
+  color: var(--gray-500);
+}
+.confirm-modal-card button {
+  width: 100%;
+  padding: 13px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
 }
 .confirmed-card {
   background: #ecfdf5;
