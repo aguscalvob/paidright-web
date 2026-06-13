@@ -9,6 +9,11 @@ export const PLAY_STORE_URL: string = '';
 
 export const CONTACT_EMAIL = 'paidright.app@hotmail.com';
 
+// App-usage demo shown in the hero phone mockup. Drop a screen recording at
+// public/demo.mp4 (portrait, muted, short loop) and set this to '/demo.mp4'.
+// While empty (''), the phone shows a branded placeholder instead.
+export const APP_DEMO_VIDEO: string = '';
+
 // Contact form delivery via Web3Forms (https://web3forms.com).
 // Get a free access key: enter paidright.app@hotmail.com at web3forms.com →
 // the key is emailed instantly (no account needed). Paste it here. The key is

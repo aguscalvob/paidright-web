@@ -48,7 +48,7 @@ export function About() {
       </p>
 
       <p style={{ marginTop: 28, fontWeight: 600, color: 'var(--brand)' }}>
-        — Agustin, Dublin
+        — The PaidRight team, Ireland
       </p>
     </main>
   );

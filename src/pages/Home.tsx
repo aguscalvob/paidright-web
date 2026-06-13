@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Logo } from '../components/Logo.tsx';
-import { APP_STORE_URL, PLAY_STORE_URL } from '../lib/links.ts';
+import { APP_DEMO_VIDEO, APP_STORE_URL, PLAY_STORE_URL } from '../lib/links.ts';
 import { usePlatform } from '../lib/usePlatform.ts';
 
 type Store = {
@@ -96,50 +96,76 @@ export function Home() {
             </div>
           </div>
 
-          <h1>
-            Are you being
-            <br />
-            <span className="accent">paid right?</span>
-          </h1>
+          <div className="hero-body">
+            <div className="hero-content">
+              <h1>
+                Are you being
+                <br />
+                <span className="accent">paid right?</span>
+              </h1>
 
-          <p className="sub">
-            Most hourly workers don't know their exact take-home, breaks, or
-            holiday rights. Now you will.
-          </p>
+              <p className="sub">
+                Most hourly workers don't know their exact take-home, breaks, or
+                holiday rights. Now you will.
+              </p>
 
-          <div className="pills">
-            {FEATURES.map((f) => (
-              <span className="pill" key={f}>
-                {f}
-              </span>
-            ))}
-          </div>
+              <div className="pills">
+                {FEATURES.map((f) => (
+                  <span className="pill" key={f}>
+                    {f}
+                  </span>
+                ))}
+              </div>
 
-          <p className="tagline">
-            Your work. Your rights. <span className="muted">Your money.</span>
-          </p>
+              <p className="tagline">
+                Your work. Your rights.{' '}
+                <span className="muted">Your money.</span>
+              </p>
 
-          <div className="downloads" id="get">
-            {isMobile ? (
-              <>
-                <StoreButton store={primary} />
-                <a
-                  className="alt-store"
-                  href={secondary.url !== '' ? secondary.url : '#get'}
-                  target={secondary.url !== '' ? '_blank' : undefined}
-                  rel={secondary.url !== '' ? 'noreferrer' : undefined}
-                >
-                  {secondary.url !== ''
-                    ? `Also on ${secondary.big}`
-                    : `${secondary.big} coming soon`}
-                </a>
-              </>
-            ) : (
-              <>
-                <StoreButton store={STORES.ios} />
-                <StoreButton store={STORES.android} />
-              </>
-            )}
+              <div className="downloads" id="get">
+                {isMobile ? (
+                  <>
+                    <StoreButton store={primary} />
+                    <a
+                      className="alt-store"
+                      href={secondary.url !== '' ? secondary.url : '#get'}
+                      target={secondary.url !== '' ? '_blank' : undefined}
+                      rel={secondary.url !== '' ? 'noreferrer' : undefined}
+                    >
+                      {secondary.url !== ''
+                        ? `Also on ${secondary.big}`
+                        : `${secondary.big} coming soon`}
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <StoreButton store={STORES.ios} />
+                    <StoreButton store={STORES.android} />
+                  </>
+                )}
+              </div>
+            </div>
+
+            <div className="hero-phone">
+              <div className="phone-frame">
+                {APP_DEMO_VIDEO !== '' ? (
+                  <video
+                    className="phone-media"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  >
+                    <source src={APP_DEMO_VIDEO} type="video/mp4" />
+                  </video>
+                ) : (
+                  <div className="phone-placeholder">
+                    <Logo size={46} />
+                    <span>App preview</span>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
