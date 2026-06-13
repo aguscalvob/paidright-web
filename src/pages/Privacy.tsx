@@ -10,7 +10,7 @@ export function Privacy() {
   return (
     <main className="content">
       <h1>Privacy Policy</h1>
-      <p className="effective">Effective date: 6 June 2026</p>
+      <p className="effective">Effective date: 13 June 2026</p>
 
       <h2>1. Who we are</h2>
       <p>
@@ -35,6 +35,12 @@ export function Privacy() {
         </li>
         <li>Optional display name</li>
       </ul>
+      <p>
+        If you choose <strong>Sign in with Apple</strong>, Apple sends us your
+        name (once, on first sign-in) and an email address — which may be an
+        Apple private relay address if you choose to hide your real one. We use
+        these only to create and identify your account.
+      </p>
       <h3>You give us directly when you use the app:</h3>
       <ul>
         <li>
@@ -126,11 +132,17 @@ export function Privacy() {
       </p>
 
       <h2>6. Who we share it with</h2>
-      <p>We share data with one processor and no other parties:</p>
+      <p>We share data with the following processors and no other parties:</p>
       <ul>
         <li>
           <strong>Supabase, Inc.</strong> — authentication and database hosting
           (EU region). Bound by their data processing addendum.
+        </li>
+        <li>
+          <strong>Apple Inc.</strong> — identity provider for the optional
+          "Sign in with Apple" feature. If you use it, Apple handles your
+          authentication and provides us a token confirming your identity.
+          Governed by Apple's own privacy policy.
         </li>
       </ul>
       <p>
