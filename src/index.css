@@ -430,6 +430,73 @@ a:hover {
   display: none;
 }
 
+/* ---- Cookie consent banner (bottom bar) ---- */
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  background: rgba(10, 24, 56, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #d8e0f0;
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
+}
+.cookie-banner-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.cookie-banner-inner p {
+  margin: 0;
+  flex: 1 1 320px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #c2cde4;
+}
+.cookie-banner-inner p strong {
+  color: #fff;
+}
+.cookie-banner-inner a {
+  color: var(--emerald-light);
+  text-decoration: underline;
+}
+.cookie-banner-actions {
+  display: flex;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+.cookie-btn {
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  min-width: 96px;
+}
+.cookie-btn-reject {
+  background: transparent;
+  color: #c2cde4;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+.cookie-btn-reject:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+.cookie-btn-accept {
+  background: var(--emerald);
+  color: var(--brand);
+}
+.cookie-btn-accept:hover {
+  background: var(--emerald-light);
+}
+
 /* ---- Email-confirmed pop-up (centred modal) ---- */
 .confirm-modal {
   position: fixed;

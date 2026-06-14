@@ -10,7 +10,7 @@ export function Privacy() {
   return (
     <main className="content">
       <h1>Privacy Policy</h1>
-      <p className="effective">Effective date: 13 June 2026</p>
+      <p className="effective">Effective date: 14 June 2026</p>
 
       <h2>1. Who we are</h2>
       <p>
@@ -144,7 +144,28 @@ export function Privacy() {
           authentication and provides us a token confirming your identity.
           Governed by Apple's own privacy policy.
         </li>
+        <li>
+          <strong>Google LLC</strong> — Google Analytics, only on our website
+          (<a href="https://paidright.app">paidright.app</a>) and only if you
+          accept the cookie banner. Used to count visits and see which pages
+          people find useful. IP addresses are anonymised and we do not use
+          Google Analytics for advertising or profiling. The app itself does
+          NOT use Google Analytics.
+        </li>
       </ul>
+
+      <h2>Website cookies</h2>
+      <p>
+        Our website uses one analytics cookie when you accept the cookie
+        banner: <code>_ga</code> / related Google Analytics cookies, set by
+        Google to count unique visits (typically expires after up to 2 years).
+      </p>
+      <p>
+        If you reject the banner, no analytics cookies are set. You can change
+        your mind at any time by clearing your browser's cookies and site data
+        for <code>paidright.app</code> — the banner will reappear on your next
+        visit. The PaidRight mobile app does not set or use cookies.
+      </p>
       <p>
         We do not share data with advertisers, analytics providers, social
         networks, or marketers. We do not sell your data. We do not have any

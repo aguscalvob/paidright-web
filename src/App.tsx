@@ -1,6 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
+import { CookieBanner } from './components/CookieBanner.tsx';
 import { Layout } from './components/Layout.tsx';
+import { trackPageView } from './lib/analytics.ts';
 import { About } from './pages/About.tsx';
 import { Contact } from './pages/Contact.tsx';
 import { Home } from './pages/Home.tsx';
@@ -9,8 +12,17 @@ import { Reset } from './pages/Reset.tsx';
 import { Terms } from './pages/Terms.tsx';
 
 export function App() {
+  // SPA route changes don't trigger gtag's default page_view; fire one manually
+  // on each navigation. No-op until/unless consent loads gtag.
+  const location = useLocation();
+  useEffect(() => {
+    trackPageView(location.pathname + location.search);
+  }, [location.pathname, location.search]);
+
   return (
-    <Routes>
+    <>
+      <CookieBanner />
+      <Routes>
       {/* Reset stands alone (centred card, no nav/footer). */}
       <Route path="/reset" element={<Reset />} />
       {/* Home is standalone — the navy hero carries its own top bar. */}
@@ -25,5 +37,6 @@ export function App() {
       {/* Unknown paths fall back to the landing page. */}
       <Route path="*" element={<Home />} />
     </Routes>
+    </>
   );
 }
