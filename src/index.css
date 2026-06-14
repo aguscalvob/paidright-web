@@ -307,10 +307,15 @@ a:hover {
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-/* Hide the phone on smaller screens so the headline + CTA stay above the fold */
+/* On smaller screens, stack the phone below the content (it still comes after
+   the headline + download CTA in the DOM, so those stay up top). */
 @media (max-width: 900px) {
+  .hero-body {
+    flex-direction: column;
+    gap: 36px;
+  }
   .hero-phone {
-    display: none;
+    align-self: center;
   }
 }
 
