@@ -67,22 +67,28 @@ let scriptLoaded = false;
 /** Load gtag.js (only once) and grant analytics_storage. */
 function loadGtagAndGrant(): void {
   if (typeof window === 'undefined') return;
-  if (!scriptLoaded) {
-    const s = document.createElement('script');
-    s.async = true;
-    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-    document.head.appendChild(s);
-    scriptLoaded = true;
 
+  // Queue the consent update + config FIRST, so gtag.js processes them in
+  // order once it loads (default denied -> update granted -> config -> hit).
+  // If we appended the <script> first, the script could be parsed before the
+  // update reaches the dataLayer, leaving analytics_storage in denied state.
+  gtag('consent', 'update', {
+    analytics_storage: 'granted',
+  });
+
+  if (!scriptLoaded) {
     gtag('js', new Date());
     gtag('config', GA_MEASUREMENT_ID, {
       anonymize_ip: true,
       send_page_view: true,
     });
+
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    document.head.appendChild(s);
+    scriptLoaded = true;
   }
-  gtag('consent', 'update', {
-    analytics_storage: 'granted',
-  });
 }
 
 /** Apply (and persist) a consent choice. */
