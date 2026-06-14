@@ -14,7 +14,7 @@
  * to be public.
  */
 
-export const GA_MEASUREMENT_ID = 'G-04Q70MT0RE';
+export const GA_MEASUREMENT_ID = 'G-B7M06N6ZXJ';
 
 const STORAGE_KEY = 'paidright-cookie-consent-v1';
 
