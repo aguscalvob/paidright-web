@@ -76,9 +76,6 @@ function loadGtagAndGrant(): void {
     window.gtag('config', GA_MEASUREMENT_ID, {
       anonymize_ip: true,
       send_page_view: true,
-      // debug_mode lights up GA's DebugView (Admin -> DebugView) — leave on
-      // for now so we can verify hits in real time; can remove later.
-      debug_mode: true,
     });
 
     const s = document.createElement('script');
