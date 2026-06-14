@@ -4,14 +4,13 @@
  * GA4 sets cookies and sends data to Google → under GDPR/ePrivacy we MUST get
  * consent before loading the script. Strategy:
  *   1. Default Google Consent Mode v2 to "denied" before anything else runs.
- *   2. Show the cookie banner. If the user accepts, persist that and load
- *      gtag.js, then call gtag('consent','update', { ... granted }).
- *   3. If they reject, persist that too and never load gtag.js (no GA cookies
- *      are set at all — the consent-default-denied call uses no cookies).
+ *   2. Show the cookie banner. If the user accepts, persist that, queue a
+ *      consent update + config, then load gtag.js.
+ *   3. If they reject, persist that too and never load gtag.js.
  *   4. Choice persists in localStorage so users aren't re-asked.
  *
- * Measurement ID is hardcoded — the publishable site key for GA4 is intended
- * to be public.
+ * Uses the EXACT Google-recommended gtag pattern (pushes `arguments`, not a
+ * rest array) because gtag.js inspects entries that way internally.
  */
 
 export const GA_MEASUREMENT_ID = 'G-B7M06N6ZXJ';
@@ -22,8 +21,8 @@ export type ConsentChoice = 'accepted' | 'rejected';
 
 declare global {
   interface Window {
-    dataLayer?: unknown[];
-    gtag?: (...args: unknown[]) => void;
+    dataLayer: IArguments[];
+    gtag: (...args: unknown[]) => void;
   }
 }
 
@@ -34,24 +33,22 @@ export function getStoredConsent(): ConsentChoice | null {
   return v === 'accepted' || v === 'rejected' ? v : null;
 }
 
-function gtag(...args: unknown[]): void {
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(args);
-}
-
 /**
  * Set Consent Mode v2 defaults to "denied" before any GA script is loaded.
- * Must run on every page load, regardless of stored consent. Safe to call
- * more than once.
+ * Installs the canonical gtag function (pushes `arguments` to dataLayer) so
+ * the gtag.js script picks up the queue correctly when it loads.
  */
 export function initConsentDefaults(): void {
   if (typeof window === 'undefined') return;
-  // Expose `gtag` globally so the later script picks up the same queue.
   window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || ((...args: unknown[]) => {
-    window.dataLayer!.push(args);
-  });
-  gtag('consent', 'default', {
+  // The Google-recommended gtag function. Use `arguments`, not rest args.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function gtag(this: unknown): void {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer.push(arguments);
+  }
+  window.gtag = gtag;
+  window.gtag('consent', 'default', {
     ad_storage: 'denied',
     ad_user_data: 'denied',
     ad_personalization: 'denied',
@@ -64,23 +61,24 @@ export function initConsentDefaults(): void {
 
 let scriptLoaded = false;
 
-/** Load gtag.js (only once) and grant analytics_storage. */
+/** Queue the consent update + config, then load gtag.js. */
 function loadGtagAndGrant(): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined' || !window.gtag) return;
 
-  // Queue the consent update + config FIRST, so gtag.js processes them in
-  // order once it loads (default denied -> update granted -> config -> hit).
-  // If we appended the <script> first, the script could be parsed before the
-  // update reaches the dataLayer, leaving analytics_storage in denied state.
-  gtag('consent', 'update', {
+  // Queue consent update + js + config FIRST. gtag.js processes the queue in
+  // order on load: default(denied) -> update(granted) -> js -> config -> hit.
+  window.gtag('consent', 'update', {
     analytics_storage: 'granted',
   });
 
   if (!scriptLoaded) {
-    gtag('js', new Date());
-    gtag('config', GA_MEASUREMENT_ID, {
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID, {
       anonymize_ip: true,
       send_page_view: true,
+      // debug_mode lights up GA's DebugView (Admin -> DebugView) — leave on
+      // for now so we can verify hits in real time; can remove later.
+      debug_mode: true,
     });
 
     const s = document.createElement('script');
@@ -98,17 +96,15 @@ export function applyConsent(choice: ConsentChoice): void {
   if (choice === 'accepted') {
     loadGtagAndGrant();
   }
-  // If rejected: defaults already deny analytics_storage; no script loaded.
 }
 
 /**
- * On boot: read the stored choice and, if it's "accepted", load GA.
- * If null (no choice yet), do nothing — the banner will be shown.
+ * On boot: set consent defaults and, if a previous "accepted" choice exists,
+ * load GA right away.
  */
 export function bootAnalytics(): void {
   initConsentDefaults();
-  const stored = getStoredConsent();
-  if (stored === 'accepted') {
+  if (getStoredConsent() === 'accepted') {
     loadGtagAndGrant();
   }
 }
