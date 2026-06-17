@@ -29,12 +29,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Brand bg on html/body so any "below" area (iOS rubber-band, short pages on
+   tall viewports, the area behind the sticky mobile CTA) stays navy instead
+   of showing white. Sections still paint their own backgrounds normally. */
+html,
+body {
+  background: var(--navy-deep);
+}
 body {
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif;
   color: var(--gray-900);
-  background: #fff;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
