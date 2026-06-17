@@ -4,7 +4,7 @@
 //   - APP_STORE_URL  → https://apps.apple.com/app/idXXXXXXXXXX
 //   - PLAY_STORE_URL → https://play.google.com/store/apps/details?id=ie.paidright.app
 // While a URL is empty (''), the landing page shows a "Coming soon" badge.
-export const APP_STORE_URL: string = '';
+export const APP_STORE_URL: string = 'https://apps.apple.com/app/id6780205516';
 export const PLAY_STORE_URL: string = '';
 
 export const CONTACT_EMAIL = 'paidright.app@hotmail.com';
