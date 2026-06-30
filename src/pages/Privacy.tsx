@@ -10,7 +10,7 @@ export function Privacy() {
   return (
     <main className="content">
       <h1>Privacy Policy</h1>
-      <p className="effective">Effective date: 14 June 2026</p>
+      <p className="effective">Effective date: 17 June 2026</p>
 
       <h2>1. Who we are</h2>
       <p>
@@ -40,6 +40,11 @@ export function Privacy() {
         name (once, on first sign-in) and an email address — which may be an
         Apple private relay address if you choose to hide your real one. We use
         these only to create and identify your account.
+      </p>
+      <p>
+        If you choose <strong>Continue with Google</strong>, Google sends us
+        your name, email address and profile picture URL. We use these only to
+        create and identify your account.
       </p>
       <h3>You give us directly when you use the app:</h3>
       <ul>
@@ -145,12 +150,16 @@ export function Privacy() {
           Governed by Apple's own privacy policy.
         </li>
         <li>
-          <strong>Google LLC</strong> — Google Analytics, only on our website
-          (<a href="https://paidright.app">paidright.app</a>) and only if you
-          accept the cookie banner. Used to count visits and see which pages
-          people find useful. IP addresses are anonymised and we do not use
-          Google Analytics for advertising or profiling. The app itself does
-          NOT use Google Analytics.
+          <strong>Google LLC</strong> — used in two distinct, narrow ways:
+          (i) <em>identity provider</em> for the optional "Continue with Google"
+          sign-in feature in the app. If you use it, Google handles your
+          authentication and provides us a token plus your name, email and
+          profile-picture URL. (ii) <em>Google Analytics</em>, only on our
+          website (<a href="https://paidright.app">paidright.app</a>) and only
+          if you accept the cookie banner — used to count visits and see which
+          pages people find useful. IP addresses are anonymised and we do not
+          use Google Analytics for advertising or profiling. The mobile app
+          itself does NOT use Google Analytics.
         </li>
       </ul>
 
