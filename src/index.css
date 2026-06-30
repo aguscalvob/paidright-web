@@ -329,7 +329,137 @@ a:hover {
 .downloads {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 24px;
+}
+/* Desktop: stores stacked on the left, QR floats to the right */
+.downloads-stores {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.downloads-qr {
+  display: flex;
+  align-items: center;
   gap: 14px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 10px 14px 10px 10px;
+}
+.downloads-qr svg {
+  display: block;
+  border-radius: 6px;
+}
+.downloads-qr-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--brand);
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+}
+/* Hide the QR on smaller screens — a phone doesn't scan its own screen */
+@media (max-width: 900px) {
+  .downloads-qr {
+    display: none;
+  }
+  .downloads-stores {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* ---- /get smart-redirect page ---- */
+.get-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(900px 520px at 75% 18%, #16356f 0%, transparent 60%),
+    linear-gradient(158deg, #0c1f4b 0%, var(--navy-deep) 100%);
+}
+.get-card {
+  background: #fff;
+  max-width: 420px;
+  width: 100%;
+  border-radius: 22px;
+  padding: 36px 28px 28px;
+  text-align: center;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+}
+.get-logo {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: var(--brand);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+.get-card h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  color: var(--brand);
+}
+.get-lead {
+  margin: 0 0 22px;
+  color: var(--gray-500);
+  font-size: 15px;
+}
+.get-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.get-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+  background: var(--brand);
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px 18px;
+  text-decoration: none;
+  transition: transform 0.08s ease;
+}
+.get-btn:hover {
+  color: #fff;
+  transform: translateY(-1px);
+}
+.get-btn-small {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.78;
+  letter-spacing: 0.04em;
+}
+.get-btn-big {
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 6px;
+}
+.get-btn-disabled {
+  background: var(--gray-100);
+  color: var(--gray-500);
+  cursor: default;
+}
+.get-btn-disabled:hover {
+  color: var(--gray-500);
+  transform: none;
+}
+.get-back {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--gray-500);
+  text-decoration: none;
+}
+.get-back:hover {
+  color: var(--brand);
 }
 .store-btn {
   display: inline-flex;

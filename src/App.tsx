@@ -6,6 +6,7 @@ import { Layout } from './components/Layout.tsx';
 import { trackPageView } from './lib/analytics.ts';
 import { About } from './pages/About.tsx';
 import { Contact } from './pages/Contact.tsx';
+import { Get } from './pages/Get.tsx';
 import { Home } from './pages/Home.tsx';
 import { Privacy } from './pages/Privacy.tsx';
 import { Reset } from './pages/Reset.tsx';
@@ -25,6 +26,8 @@ export function App() {
       <Routes>
       {/* Reset stands alone (centred card, no nav/footer). */}
       <Route path="/reset" element={<Reset />} />
+      {/* Smart store-redirect (target of the homepage QR). */}
+      <Route path="/get" element={<Get />} />
       {/* Home is standalone — the navy hero carries its own top bar. */}
       <Route path="/" element={<Home />} />
       {/* Inner pages share the white nav + footer chrome. */}

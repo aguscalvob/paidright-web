@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Logo } from '../components/Logo.tsx';
@@ -139,8 +140,25 @@ export function Home() {
                   </>
                 ) : (
                   <>
-                    <StoreButton store={STORES.ios} />
-                    <StoreButton store={STORES.android} />
+                    <div className="downloads-stores">
+                      <StoreButton store={STORES.ios} />
+                      <StoreButton store={STORES.android} />
+                    </div>
+                    <div className="downloads-qr" aria-label="QR code to download the app">
+                      <QRCodeSVG
+                        value="https://paidright.app/get"
+                        size={104}
+                        bgColor="#ffffff"
+                        fgColor="#0c1f4b"
+                        level="M"
+                        marginSize={2}
+                      />
+                      <p className="downloads-qr-label">
+                        Scan to download
+                        <br />
+                        on your phone
+                      </p>
+                    </div>
                   </>
                 )}
               </div>
