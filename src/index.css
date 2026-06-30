@@ -418,7 +418,7 @@ a:hover {
 .get-btn {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 12px;
   justify-content: center;
   background: var(--brand);
   color: #fff;
@@ -431,6 +431,16 @@ a:hover {
   color: #fff;
   transform: translateY(-1px);
 }
+.get-btn-icon {
+  flex: 0 0 auto;
+  color: #fff;
+}
+.get-btn-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
 .get-btn-small {
   font-size: 11px;
   font-weight: 600;
@@ -440,7 +450,6 @@ a:hover {
 .get-btn-big {
   font-size: 16px;
   font-weight: 700;
-  margin-left: 6px;
 }
 .get-btn-disabled {
   background: var(--gray-100);
@@ -479,9 +488,13 @@ a:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
 }
-.store-btn .glyph {
-  font-size: 28px;
-  line-height: 1;
+.store-btn .store-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Apple logo is solid navy; Google Play SVG is multi-colour and ignores
+     this `color` (its paths set their own fills). Both look right on white. */
+  color: #000;
 }
 .store-btn .store-label {
   display: flex;

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Logo } from '../components/Logo.tsx';
+import { AppleIcon, GooglePlayIcon } from '../components/PlatformIcons.tsx';
 import { APP_STORE_URL, PLAY_STORE_URL } from '../lib/links.ts';
 import { usePlatform } from '../lib/usePlatform.ts';
 
@@ -65,8 +66,11 @@ export function Get() {
               target="_blank"
               rel="noreferrer"
             >
-              <span className="get-btn-small">Download on the</span>
-              <span className="get-btn-big">App Store</span>
+              <AppleIcon size={22} className="get-btn-icon" />
+              <span className="get-btn-text">
+                <span className="get-btn-small">Download on the</span>
+                <span className="get-btn-big">App Store</span>
+              </span>
             </a>
           ) : null}
           {showPlay ? (
@@ -76,13 +80,19 @@ export function Get() {
               target="_blank"
               rel="noreferrer"
             >
-              <span className="get-btn-small">Get it on</span>
-              <span className="get-btn-big">Google Play</span>
+              <GooglePlayIcon size={22} className="get-btn-icon" />
+              <span className="get-btn-text">
+                <span className="get-btn-small">Get it on</span>
+                <span className="get-btn-big">Google Play</span>
+              </span>
             </a>
           ) : (
             <div className="get-btn get-btn-disabled">
-              <span className="get-btn-small">Coming soon</span>
-              <span className="get-btn-big">Google Play</span>
+              <GooglePlayIcon size={22} className="get-btn-icon" />
+              <span className="get-btn-text">
+                <span className="get-btn-small">Coming soon</span>
+                <span className="get-btn-big">Google Play</span>
+              </span>
             </div>
           )}
         </div>

@@ -3,20 +3,20 @@ import { QRCodeSVG } from 'qrcode.react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Logo } from '../components/Logo.tsx';
+import { AppleIcon, GooglePlayIcon } from '../components/PlatformIcons.tsx';
 import { APP_DEMO_VIDEO, APP_STORE_URL, PLAY_STORE_URL } from '../lib/links.ts';
 import { usePlatform } from '../lib/usePlatform.ts';
 
 type Store = {
   key: 'ios' | 'android';
   url: string;
-  glyph: string;
   small: string;
   big: string;
 };
 
 const STORES: Record<'ios' | 'android', Store> = {
-  ios: { key: 'ios', url: APP_STORE_URL, glyph: '', small: 'Download on the', big: 'App Store' },
-  android: { key: 'android', url: PLAY_STORE_URL, glyph: '▶', small: 'Get it on', big: 'Google Play' },
+  ios: { key: 'ios', url: APP_STORE_URL, small: 'Download on the', big: 'App Store' },
+  android: { key: 'android', url: PLAY_STORE_URL, small: 'Get it on', big: 'Google Play' },
 };
 
 /** A single store download button. Shows "Coming soon" until `url` is set. */
@@ -30,8 +30,8 @@ function StoreButton({ store }: { store: Store }) {
       target={live ? '_blank' : undefined}
       rel={live ? 'noreferrer' : undefined}
     >
-      <span className="glyph" aria-hidden="true">
-        {store.glyph}
+      <span className="store-icon" aria-hidden="true">
+        {store.key === 'ios' ? <AppleIcon size={26} /> : <GooglePlayIcon size={24} />}
       </span>
       <span className="store-label">
         <span className="small">{live ? store.small : 'Coming soon'}</span>
